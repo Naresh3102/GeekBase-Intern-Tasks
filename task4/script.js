@@ -3,6 +3,8 @@ const playerTurn = document.querySelector("h2.player-turn > span");
 const statusTxt = document.querySelector("#status");
 const btnReset = document.querySelector("#reset");
 const btnBack = document.querySelector("#back");
+const checkbox = document.getElementById("myCheckbox");
+const switchElement = document.getElementById("toggleSwitch");
 
 const win = [
   [0, 1, 2],
@@ -19,10 +21,13 @@ let gameHistory = [];
 let options = ["", "", "", "", "", "", "", "", ""];
 let player = "X";
 let running = true;
+let isSwitchOn = checkbox.checked;
 
 boxs.forEach((box) => box.addEventListener("click", boxClick));
 btnReset.addEventListener("click", restartGame);
 btnBack.addEventListener("click", back);
+checkbox.addEventListener("change", toggleSwitch);
+
 playerTurn.textContent = `${player}`;
 
 function boxClick() {
@@ -74,6 +79,12 @@ function checkWinner() {
   } else {
     changePlayer();
   }
+}
+
+function toggleSwitch() {
+  isSwitchOn = !isSwitchOn;
+  checkbox.checked = isSwitchOn;
+  btnBack.disabled = !isSwitchOn;
 }
 
 function back() {
