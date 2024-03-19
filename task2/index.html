@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock">
+        <div class="time" id="time"></div>
+      </div>
+      <div class="activity_image">
+        <img src="" alt="activity image" id="activityImage" />
+      </div>
+      <div class="settings">
+        <img src="setting.png" alt="Settings icon" id="settingsIcon" />
+      </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Set Timings</h2>
+        <form class="form" id="settingsForm">
+          <div class="input-field">
+            <label for="sleepStart">Sleeping Time:</label>
+            <input
+              type="time"
+              id="sleepStart"
+              name="sleepStart"
+              value="21:00"
+              required
+            />
+            <p>to</p>
+            <input
+              type="time"
+              id="sleepEnd"
+              name="sleepEnd"
+              value="05:00"
+              required
+            />
+          </div>
+          <br />
+          <div class="input-field">
+            <label for="wakeUpTime">Wake Up Time:</label>
+            <input
+              type="time"
+              id="wakeUpStart"
+              name="wakeUpStart"
+              value="06:00"
+              required
+            />
+            <p>to</p>
+            <input
+            type="time"
+            id="wakeUpEnd"
+            name="wakeUpEnd"
+            value="12:00"
+            required
+          />
+          </div>
+          <br />
+          <div class="input-field">
+            <label for="lunchStart">Lunch Time:</label>
+            <input
+              type="time"
+              id="lunchStart"
+              name="lunchStart"
+              value="12:00"
+              required
+            />
+            <p>to</p>
+            <input
+              type="time"
+              id="lunchEnd"
+              name="lunchEnd"
+              value="12:00"
+              required
+            />
+          </div>
+          <br />
+          <input type="submit" value="Save" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
