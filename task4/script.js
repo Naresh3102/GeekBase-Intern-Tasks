@@ -2,6 +2,7 @@ const boxs = document.querySelectorAll(".box");
 const playerTurn = document.querySelector("h2.player-turn > span");
 const statusTxt = document.querySelector("#status");
 const btnReset = document.querySelector("#reset");
+const btnBack = document.querySelector("#back");
 
 const win = [
   [0, 1, 2],
@@ -14,12 +15,14 @@ const win = [
   [2, 4, 6],
 ];
 
+let gameHistory = [];
 let options = ["", "", "", "", "", "", "", "", ""];
 let player = "X";
 let running = true;
 
 boxs.forEach((box) => box.addEventListener("click", boxClick));
 btnReset.addEventListener("click", restartGame);
+btnBack.addEventListener("click", back);
 playerTurn.textContent = `${player}`;
 
 function boxClick() {
@@ -27,6 +30,10 @@ function boxClick() {
   if (options[index] != "" || !running) {
     return;
   }
+
+  const currenState = options.slice();
+  gameHistory.push(currenState);
+
   updateBox(this, index);
   checkWinner();
 }
@@ -69,6 +76,29 @@ function checkWinner() {
   }
 }
 
+function back() {
+  if (gameHistory.length === 0) {
+    return;
+  }
+
+  options = gameHistory.pop();
+  changePlayer();
+  renderBoard();
+}
+
+function renderBoard() {
+  boxs.forEach((box, index) => {
+    box.textContent = options[index];
+    if (options[index] === "X") {
+      box.style.backgroundColor = "#00d900";
+    } else if (options[index] === "O") {
+      box.style.backgroundColor = "#0037ffb0";
+    } else {
+      box.style.backgroundColor = "#fbff00b0";
+    }
+  });
+}
+
 function restartGame() {
   options = ["", "", "", "", "", "", "", "", ""];
   player = "X";
@@ -76,9 +106,7 @@ function restartGame() {
   playerTurn.textContent = `${player}`;
   playerTurn.style.color = "#00d900";
   statusTxt.innerHTML = "";
+  gameHistory.length = 0;
 
-  boxs.forEach((box) => {
-    box.innerHTML = "";
-    box.style.backgroundColor = "#fbff00b0";
-  });
+  renderBoard();
 }
